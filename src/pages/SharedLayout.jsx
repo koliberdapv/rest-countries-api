@@ -1,16 +1,24 @@
 import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
+import { Navbar } from '../components/';
 
 const SharedLayout = () => {
 	const handleClick = () => {
 		document.body.classList.add('dark-mode');
 	};
 	return (
-		<div className="wrapper">
-			<h1>Shared layout</h1>
-			<button onClick={handleClick}>dark mode</button>
-			<Outlet />
-		</div>
+		<Wrapper>
+			<Navbar />
+			<div className="container">
+				<Outlet />
+			</div>
+		</Wrapper>
 	);
 };
+
+const Wrapper = styled.section`
+	display: grid;
+	grid-template-columns: 1fr;
+`;
 
 export default SharedLayout;
