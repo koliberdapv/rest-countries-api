@@ -112,7 +112,9 @@ h4 {
 h5 {
 	font-size: 1.25rem;
 }
-
+span {
+	color: var(--clr-text);
+}
 a {
 	text-decoration: none;
 	letter-spacing: var(--letterSpacing);
