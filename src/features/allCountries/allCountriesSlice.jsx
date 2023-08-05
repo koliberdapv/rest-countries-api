@@ -11,7 +11,7 @@ const initialFilterState = {
 
 const initialState = {
 	isLoading: true,
-	countries: [],
+	countries: {},
 	totalCountries: 0,
 	numOfPages: 1,
 	page: 1,
@@ -24,7 +24,16 @@ export const getAllCountries = createAsyncThunk(
 		let url = '/all';
 		try {
 			const resp = await customFetch(url);
-			return resp;
+			const data = resp.data.slice(0, 10).map((item) => {
+				const { name, capital, flags, population } = item;
+				return {
+					name: name.official,
+					population,
+					capital: capital?.[0] || 'N/A',
+					flags,
+				};
+			});
+			return data;
 		} catch (error) {
 			return thunkAPI.rejectWithValue('There was an error');
 		}
@@ -35,7 +44,18 @@ const allCountriesSlice = createSlice({
 	name: 'allCountries',
 	initialState,
 	reducers: {},
-	extraReducers: {},
+	extraReducers: {
+		[getAllCountries.pending]: (state) => {
+			state.isLoading = true;
+		},
+		[getAllCountries.fulfilled]: (state, { payload }) => {
+			state.isLoading = false;
+			state.countries = payload;
+		},
+		[getAllCountries.rejected]: (state, { payload }) => {
+			state.isLoading = false;
+		},
+	},
 });
 
 export const {} = allCountriesSlice.actions;

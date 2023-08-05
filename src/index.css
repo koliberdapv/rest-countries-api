@@ -41,7 +41,7 @@ html {
 	--bodyFont: 'Nunito Sans', sans-serif;
 
 	/* rest of the vars */
-	--borderRadius: 0.25rem;
+	--borderRadius: 0.35rem;
 	--letterSpacing: 1px;
 	--transition: 0.3s ease-in-out all;
 	--max-width: 1120px;
@@ -64,6 +64,7 @@ html {
 	--clr-text: var(--clr-white);
 	--clr-elements: var(--clr-dark-blue);
 	--clr-background: var(--clr-very-dark-blue);
+	overflow: hidden;
 }
 
 body {
