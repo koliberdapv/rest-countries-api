@@ -34,6 +34,17 @@ const Wrapper = styled.main`
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 2rem;
+	justify-items: center;
+	@media screen and (width > 755px) {
+		grid-template-columns: 1fr 1fr;
+		justify-items: space-between;
+	}
+	@media screen and (width > 1160px) {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+	@media screen and (width > 1300px) {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
 `;
 
 export default AllCountriesContainer;

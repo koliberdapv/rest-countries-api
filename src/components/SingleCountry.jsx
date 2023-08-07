@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-const SingleCountry = ({ name, population, capital, flags }) => {
-	// console.log(flags);
+const SingleCountry = ({ name, population, capital, flags, region }) => {
 	return (
 		<Wrapper>
 			<div className="img-container">
@@ -11,9 +10,18 @@ const SingleCountry = ({ name, population, capital, flags }) => {
 				/>
 			</div>
 			<div className="info">
-				<h4>{name}</h4>
-				<p>population: {population}</p>
-				<p>capital: {capital}</p>
+				<h5>{name}</h5>
+				<div className="stats">
+					<p>
+						<span>population:</span> {population}
+					</p>
+					<p>
+						<span>region:</span> {region}
+					</p>
+					<p>
+						<span>capital:</span> {capital}
+					</p>
+				</div>
 			</div>
 		</Wrapper>
 	);
@@ -21,24 +29,37 @@ const SingleCountry = ({ name, population, capital, flags }) => {
 
 const Wrapper = styled.article`
 	display: grid;
-	grid-template-rows: 50% 50%;
-	grid-template-columns: auto;
+	grid-template-rows: auto 1fr;
 	background-color: var(--clr-elements);
 	border-radius: var(--borderRadius);
 	overflow: hidden;
 	text-transform: capitalize;
+	max-width: 280px;
+	h5 {
+		margin-bottom: 1rem;
+	}
 	.img-container {
+		width: 280px;
+		aspect-ratio: 16/9;
 		img {
 			height: 100%;
+			width: 100%;
 		}
 	}
 	.info {
 		display: grid;
-		align-items: center;
+		align-items: flex-end;
 		justify-content: flex-start;
 		padding: 2rem;
 		p {
 		}
+	}
+	.stats {
+	}
+	.bold {
+	}
+	span {
+		font-weight: var(--fw-600);
 	}
 `;
 

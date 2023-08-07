@@ -24,13 +24,14 @@ export const getAllCountries = createAsyncThunk(
 		let url = '/all';
 		try {
 			const resp = await customFetch(url);
-			const data = resp.data.slice(0, 10).map((item) => {
-				const { name, capital, flags, population } = item;
+			const data = resp.data.map((country) => {
+				const { name, capital, flags, population, region } = country;
 				return {
 					name: name.official,
 					population,
 					capital: capital?.[0] || 'N/A',
 					flags,
+					region,
 				};
 			});
 			return data;
