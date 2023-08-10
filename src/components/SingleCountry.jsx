@@ -1,29 +1,32 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SingleCountry = ({ name, population, capital, flags, region }) => {
 	return (
-		<Wrapper>
-			<div className="img-container">
-				<img
-					src={flags.png}
-					alt={flags.alt}
-				/>
-			</div>
-			<div className="info">
-				<h5>{name}</h5>
-				<div className="stats">
-					<p>
-						<span>population:</span> {population}
-					</p>
-					<p>
-						<span>region:</span> {region}
-					</p>
-					<p>
-						<span>capital:</span> {capital}
-					</p>
+		<Link to={`/name/${name}`}>
+			<Wrapper>
+				<div className="img-container">
+					<img
+						src={flags.png}
+						alt={flags.alt}
+					/>
 				</div>
-			</div>
-		</Wrapper>
+				<div className="info">
+					<h5>{name}</h5>
+					<div className="stats">
+						<p>
+							<span>population:</span> {population}
+						</p>
+						<p>
+							<span>region:</span> {region}
+						</p>
+						<p>
+							<span>capital:</span> {capital}
+						</p>
+					</div>
+				</div>
+			</Wrapper>
+		</Link>
 	);
 };
 

@@ -53,7 +53,7 @@ const allCountriesSlice = createSlice({
 			state.isLoading = false;
 			state.countries = payload;
 		},
-		[getAllCountries.rejected]: (state, { payload }) => {
+		[getAllCountries.rejected]: (state) => {
 			state.isLoading = false;
 		},
 	},

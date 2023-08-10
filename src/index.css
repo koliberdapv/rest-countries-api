@@ -125,6 +125,8 @@ button {
 	line-height: 1.15;
 	background: transparent;
 	border: none;
+	cursor: pointer;
+	color: var(--clr-text);
 }
 button:disabled {
 	cursor: not-allowed;
