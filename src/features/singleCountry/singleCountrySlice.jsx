@@ -14,6 +14,7 @@ export const getSingleCountry = createAsyncThunk(
 		let url = `/name/${countryName}`;
 		try {
 			const resp = await customFetch(url);
+			// check for the status
 			const {
 				name,
 				population,
@@ -24,7 +25,9 @@ export const getSingleCountry = createAsyncThunk(
 				currencies,
 				languages,
 				borders,
+				flags,
 			} = resp.data?.[0];
+
 			return {
 				name,
 				population,
@@ -35,9 +38,11 @@ export const getSingleCountry = createAsyncThunk(
 				currencies,
 				languages,
 				borders,
+				flags,
 			};
 		} catch (error) {
 			return thunkAPI.rejectWithValue('No data found');
+			// redirect to main page
 		}
 	}
 );

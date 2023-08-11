@@ -147,3 +147,7 @@ ul {
 	padding: 1.5rem 0;
 	max-width: 1350px;
 }
+.bold {
+	font-weight: var(--fw-600);
+	text-transform: capitalize;
+}
