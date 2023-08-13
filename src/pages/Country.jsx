@@ -6,6 +6,7 @@ import {
 	setCountryName,
 } from '../features/singleCountry/singleCountrySlice';
 import styled from 'styled-components';
+import formatPopulation from '../utils/formatPopulation';
 
 const Country = () => {
 	const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const Country = () => {
 	}, [params.id]);
 
 	if (isLoading) return <div>Loading</div>;
-	// return <div>country</div>;
+
 	return (
 		<Wrapper>
 			<div className="img-container">
@@ -51,7 +52,7 @@ const Country = () => {
 						</p>
 						<p>
 							<span className="bold">population: </span>
-							{population}
+							{formatPopulation(population)}
 						</p>
 						<p>
 							<span className="bold">region: </span>

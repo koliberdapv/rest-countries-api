@@ -32,18 +32,18 @@ const AllCountriesContainer = () => {
 
 const Wrapper = styled.main`
 	display: grid;
-	grid-template-columns: 1fr;
-	gap: 2rem;
-	justify-items: center;
-	@media screen and (width > 755px) {
-		grid-template-columns: 1fr 1fr;
-		justify-items: space-between;
+	grid-template-columns: auto;
+	row-gap: 3rem;
+	justify-content: center;
+	@media screen and (width > 725px) {
+		grid-template-columns: repeat(2, auto);
+		justify-content: space-between;
 	}
-	@media screen and (width > 1160px) {
-		grid-template-columns: 1fr 1fr 1fr;
+	@media screen and (width > 1120px) {
+		grid-template-columns: repeat(3, auto);
 	}
-	@media screen and (width > 1300px) {
-		grid-template-columns: 1fr 1fr 1fr 1fr;
+	@media screen and (width > 1450px) {
+		grid-template-columns: repeat(4, auto);
 	}
 `;
 

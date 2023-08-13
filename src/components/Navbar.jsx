@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { BsMoon } from 'react-icons/bs';
 import { BsMoonFill } from 'react-icons/bs';
 import { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const isDarkModeEnabled = localStorage.getItem('dark-mode') === 'enabled';
 
@@ -26,7 +27,9 @@ const Navbar = () => {
 		<Wrapper>
 			<div className="container">
 				<div className="navbar">
-					<h4>Where in the world?</h4>
+					<Link to="/">
+						<h4>Where in the world?</h4>
+					</Link>
 					<button
 						className="dark-mode-btn"
 						aria-label="dark-mode"
