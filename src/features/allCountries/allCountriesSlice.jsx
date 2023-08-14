@@ -25,13 +25,21 @@ export const getAllCountries = createAsyncThunk(
 		try {
 			const resp = await customFetch(url);
 			const data = resp.data.map((country) => {
-				const { name, capital, flags, population, region } = country;
+				const {
+					name,
+					capital,
+					flags,
+					population,
+					region,
+					cca3: code,
+				} = country;
 				return {
 					name: name.official,
 					population,
 					capital: capital?.[0] || 'N/A',
 					flags,
 					region,
+					code,
 				};
 			});
 			return data;

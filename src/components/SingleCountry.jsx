@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import formatPopulation from '../utils/formatPopulation';
 
-const SingleCountry = ({ name, population, capital, flags, region }) => {
+const SingleCountry = ({ name, population, capital, flags, region, code }) => {
 	return (
 		<Wrapper>
-			<Link to={`/name/${name}`}>
+			<Link to={`/name/${code}`}>
 				<div className="img-container">
 					<img
 						src={flags.png}

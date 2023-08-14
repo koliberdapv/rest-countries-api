@@ -69,6 +69,7 @@ html {
 body {
 	background: var(--clr-background);
 	font-family: var(--bodyFont);
+	font-size: var(--fs-homepage-normal);
 	font-weight: var(--fw-300);
 	line-height: 1.75;
 	color: var(--clr-text);

@@ -11,7 +11,7 @@ export const getSingleCountry = createAsyncThunk(
 	'singleCountry/getCountry',
 	async (_, thunkAPI) => {
 		const { countryName } = thunkAPI.getState().singleCountry;
-		let url = `/name/${countryName}`;
+		let url = `/alpha/${countryName}`;
 		try {
 			const resp = await customFetch(url);
 			// check for the status
