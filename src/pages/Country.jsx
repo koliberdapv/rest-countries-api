@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	getSingleCountry,
 	setCountryName,
+	setPrevCountryName,
 } from '../features/singleCountry/singleCountrySlice';
 import styled from 'styled-components';
 import formatPopulation from '../utils/formatPopulation';
@@ -12,7 +13,9 @@ import { BsArrowLeft } from 'react-icons/bs';
 const Country = () => {
 	const dispatch = useDispatch();
 	const params = useParams();
-	const { isLoading, country } = useSelector((store) => store.singleCountry);
+	const { isLoading, country, previousCountryName, countryName } = useSelector(
+		(store) => store.singleCountry
+	);
 	const {
 		name,
 		population,
@@ -27,15 +30,23 @@ const Country = () => {
 	} = country;
 
 	useEffect(() => {
+		if (previousCountryName !== countryName) dispatch(setPrevCountryName());
 		dispatch(setCountryName(params.id));
 		dispatch(getSingleCountry());
 	}, [params.id]);
 
 	if (isLoading) return <div>Loading</div>;
 
+	const currency = Object.values(currencies);
+	const nativeName = Object.values(name?.nativeName);
+	const language = Object.values(languages);
 	return (
 		<Wrapper>
-			<Link to="/">
+			<Link
+				to={`/${
+					previousCountryName.length > 1 ? `name/${previousCountryName}` : ''
+				}`}
+			>
 				<button className="btn back">
 					<BsArrowLeft />
 					back
@@ -49,16 +60,16 @@ const Country = () => {
 					/>
 				</div>
 				<div className="info">
-					<h4 className="bold">{name?.official}</h4>
+					<h4 className="bold">{name?.common}</h4>
 					<div className="sub-info">
 						<div>
 							<p>
 								<span className="bold">native name: </span>
-								{}
+								{nativeName?.[nativeName.length - 1]?.common}
 							</p>
 							<p>
 								<span className="bold">population: </span>
-								{formatPopulation(population)}
+								{population && formatPopulation(population)}
 							</p>
 							<p>
 								<span className="bold">region: </span>
@@ -76,31 +87,64 @@ const Country = () => {
 						<div>
 							<p>
 								<span className="bold">top level domain: </span>
-								{tld}
+								{tld?.map((item, index) => {
+									return (
+										<span
+											key={index}
+											className="tld"
+										>
+											{item}
+											{tld.length - 1 === index ? ' ' : ', '}
+										</span>
+									);
+								})}
 							</p>
 							<p>
 								<span className="bold">currencies: </span>
-								{}
+								{currency.map((curr, index) => {
+									return (
+										<span
+											key={index}
+											className="currency"
+										>
+											{curr.name}
+											{currency.length - 1 === index ? ' ' : ', '}
+										</span>
+									);
+								})}
 							</p>
 							<p>
 								<span className="bold">languages: </span>
+								{language?.map((lang, index) => {
+									return (
+										<span
+											className="language"
+											key={index}
+										>
+											{lang}
+											{language.length - 1 === index ? ' ' : ', '}
+										</span>
+									);
+								})}
 							</p>
 						</div>
 					</div>
 					<ul>
 						<p>
-							<span className="bold">border countries: </span>
+							<span className="bold border-countries">border countries: </span>
 						</p>
-						{borders.map((item, index) => {
-							return (
-								<Link
-									key={index}
-									to={`/name/${item}`}
-								>
-									<button className="btn">{item}</button>
-								</Link>
-							);
-						})}
+						{borders
+							? borders?.map((item, index) => {
+									return (
+										<Link
+											key={index}
+											to={`/name/${item}`}
+										>
+											<button className="btn">{item}</button>
+										</Link>
+									);
+							  })
+							: 'None'}
 					</ul>
 				</div>
 			</div>
@@ -116,6 +160,7 @@ const Wrapper = styled.main`
 		display: grid;
 		grid-template-columns: 1fr;
 		padding: 2rem 0;
+		gap: 2rem;
 	}
 	.img-container {
 		width: 100%;
@@ -147,7 +192,7 @@ const Wrapper = styled.main`
 	}
 	.btn {
 		background-color: var(--clr-elements);
-		padding: 0.5rem 1.25rem;
+		padding: 0.75rem 1.75rem;
 		border-radius: 5px;
 		box-shadow: var(--shadow-2);
 		text-transform: capitalize;
@@ -157,10 +202,14 @@ const Wrapper = styled.main`
 		gap: 0.5rem;
 		justify-content: center;
 	}
+	.border-countries {
+		font-size: 1.15rem;
+	}
 	@media screen and (width > 700px) {
 		.content {
 			justify-content: space-between;
 			grid-template-columns: repeat(2, 45%);
+			gap: 0;
 		}
 		.img-container {
 			max-width: 40vw;
@@ -169,6 +218,9 @@ const Wrapper = styled.main`
 			display: grid;
 			grid-template-columns: repeat(2, auto);
 			justify-content: space-between;
+		}
+		.border-countries {
+			font-size: var(--fs-details-normal);
 		}
 	}
 `;

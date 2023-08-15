@@ -34,7 +34,7 @@ export const getAllCountries = createAsyncThunk(
 					cca3: code,
 				} = country;
 				return {
-					name: name.official,
+					name: name.common,
 					population,
 					capital: capital?.[0] || 'N/A',
 					flags,

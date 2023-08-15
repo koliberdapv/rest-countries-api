@@ -5,6 +5,7 @@ const initialState = {
 	isLoading: true,
 	country: {},
 	countryName: '',
+	previousCountryName: '',
 };
 
 export const getSingleCountry = createAsyncThunk(
@@ -54,6 +55,9 @@ const singleCountry = createSlice({
 		setCountryName: (state, { payload }) => {
 			state.countryName = payload;
 		},
+		setPrevCountryName: (state) => {
+			state.previousCountryName = state.countryName;
+		},
 	},
 	extraReducers: {
 		[getSingleCountry.pending]: (state) => {
@@ -69,6 +73,6 @@ const singleCountry = createSlice({
 	},
 });
 
-export const { setCountryName } = singleCountry.actions;
+export const { setCountryName, setPrevCountryName } = singleCountry.actions;
 
 export default singleCountry.reducer;
