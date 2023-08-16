@@ -201,6 +201,7 @@ const Wrapper = styled.main`
 		display: flex;
 		gap: 0.5rem;
 		justify-content: center;
+		margin-top: 2rem;
 	}
 	.border-countries {
 		font-size: 1.15rem;

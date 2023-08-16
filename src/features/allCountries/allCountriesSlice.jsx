@@ -21,7 +21,15 @@ const initialState = {
 export const getAllCountries = createAsyncThunk(
 	'allCountries/getCounties',
 	async (_, thunkAPI) => {
-		let url = '/all';
+		const { sort } = thunkAPI.getState().allCountries;
+
+		let url;
+		if (sort.length === 0) {
+			url = '/all';
+		} else {
+			url = `/region/${sort}`;
+		}
+
 		try {
 			const resp = await customFetch(url);
 			const data = resp.data.map((country) => {
@@ -52,7 +60,12 @@ export const getAllCountries = createAsyncThunk(
 const allCountriesSlice = createSlice({
 	name: 'allCountries',
 	initialState,
-	reducers: {},
+	reducers: {
+		handleChange: (state, { payload: { value } }) => {
+			// state.page = 1;
+			state.sort = value;
+		},
+	},
 	extraReducers: {
 		[getAllCountries.pending]: (state) => {
 			state.isLoading = true;
@@ -67,6 +80,6 @@ const allCountriesSlice = createSlice({
 	},
 });
 
-export const {} = allCountriesSlice.actions;
+export const { handleChange } = allCountriesSlice.actions;
 
 export default allCountriesSlice.reducer;
