@@ -3,11 +3,14 @@ import { BsMoon } from 'react-icons/bs';
 import { BsMoonFill } from 'react-icons/bs';
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { clearFilters } from '../features/allCountries/allCountriesSlice';
+import { useDispatch } from 'react-redux';
 
 const isDarkModeEnabled = localStorage.getItem('dark-mode') === 'enabled';
 
 const Navbar = () => {
 	const [darkMode, setDarkMode] = useState(isDarkModeEnabled);
+	const dispatch = useDispatch();
 	const handleClick = () => {
 		if (!darkMode) {
 			setDarkMode(true);
@@ -23,13 +26,18 @@ const Navbar = () => {
 		if (darkMode) document.body.classList.add('dark-mode');
 	}, [darkMode]);
 
+	const handleClickBack = () => {
+		dispatch(clearFilters());
+	};
 	return (
 		<Wrapper>
 			<div className="container">
 				<div className="navbar">
-					<Link to="/">
-						<h4>Where in the world?</h4>
-					</Link>
+					<button onClick={handleClickBack}>
+						<Link to="/">
+							<h4>Where in the world?</h4>
+						</Link>
+					</button>
 					<button
 						className="dark-mode-btn"
 						aria-label="dark-mode"

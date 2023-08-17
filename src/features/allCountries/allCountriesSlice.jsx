@@ -6,7 +6,7 @@ const initialFilterState = {
 	searchStatus: '',
 	searchType: '',
 	sort: '',
-	sortOptions: ['africa', 'america', 'asia', 'europe', 'oceania'],
+	sortOptions: ['Africa', 'america', 'asia', 'europe', 'oceania'],
 };
 
 const initialState = {
@@ -21,13 +21,15 @@ const initialState = {
 export const getAllCountries = createAsyncThunk(
 	'allCountries/getCounties',
 	async (_, thunkAPI) => {
-		const { sort } = thunkAPI.getState().allCountries;
+		const { sort, search } = thunkAPI.getState().allCountries;
 
 		let url;
-		if (sort.length === 0) {
-			url = '/all';
-		} else {
+		if (search) {
+			url = `/name/${search}`;
+		} else if (sort) {
 			url = `/region/${sort}`;
+		} else {
+			url = '/all';
 		}
 
 		try {
@@ -61,9 +63,15 @@ const allCountriesSlice = createSlice({
 	name: 'allCountries',
 	initialState,
 	reducers: {
-		handleChange: (state, { payload: { value } }) => {
+		handleChange: (state, { payload: { name, value } }) => {
 			// state.page = 1;
-			state.sort = value;
+			if (name === 'sort') {
+				state.search = '';
+			}
+			state[name] = value;
+		},
+		clearFilters: (state) => {
+			return { ...state, ...initialFilterState };
 		},
 	},
 	extraReducers: {
@@ -80,6 +88,6 @@ const allCountriesSlice = createSlice({
 	},
 });
 
-export const { handleChange } = allCountriesSlice.actions;
+export const { handleChange, clearFilters } = allCountriesSlice.actions;
 
 export default allCountriesSlice.reducer;

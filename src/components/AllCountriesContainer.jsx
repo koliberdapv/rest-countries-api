@@ -5,14 +5,14 @@ import { useEffect } from 'react';
 import SingleCountry from './SingleCountry';
 
 const AllCountriesContainer = () => {
-	const { isLoading, countries, sort } = useSelector(
+	const { isLoading, countries, sort, search } = useSelector(
 		(store) => store.allCountries
 	);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getAllCountries());
-	}, [sort]);
+	}, [sort, search]);
 
 	if (isLoading) return <h1>Loading</h1>;
 
