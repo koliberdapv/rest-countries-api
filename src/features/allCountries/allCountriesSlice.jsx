@@ -12,9 +12,8 @@ const initialFilterState = {
 const initialState = {
 	isLoading: true,
 	countries: {},
-	totalCountries: 0,
-	numOfPages: 1,
-	page: 1,
+	page: 0,
+	countriesPerPage: 10,
 	...initialFilterState,
 };
 
@@ -73,6 +72,9 @@ const allCountriesSlice = createSlice({
 		clearFilters: (state) => {
 			return { ...state, ...initialFilterState };
 		},
+		changePage: (state, { payload }) => {
+			state.page = payload;
+		},
 	},
 	extraReducers: {
 		[getAllCountries.pending]: (state) => {
@@ -81,6 +83,7 @@ const allCountriesSlice = createSlice({
 		[getAllCountries.fulfilled]: (state, { payload }) => {
 			state.isLoading = false;
 			state.countries = payload;
+			state.page = 1;
 		},
 		[getAllCountries.rejected]: (state) => {
 			state.isLoading = false;
@@ -88,6 +91,7 @@ const allCountriesSlice = createSlice({
 	},
 });
 
-export const { handleChange, clearFilters } = allCountriesSlice.actions;
+export const { handleChange, clearFilters, changePage } =
+	allCountriesSlice.actions;
 
 export default allCountriesSlice.reducer;

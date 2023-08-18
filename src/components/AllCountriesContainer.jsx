@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllCountries } from '../features/allCountries/allCountriesSlice';
 import { useEffect } from 'react';
 import SingleCountry from './SingleCountry';
+import paginate from '../utils/paginate';
+import ButtonsContainer from './ButtonsContainer';
 
 const AllCountriesContainer = () => {
-	const { isLoading, countries, sort, search } = useSelector(
+	const { isLoading, countries, sort, search, page } = useSelector(
 		(store) => store.allCountries
 	);
 	const dispatch = useDispatch();
+	const paginatedCountries = paginate(countries);
 
 	useEffect(() => {
 		dispatch(getAllCountries());
@@ -17,16 +20,19 @@ const AllCountriesContainer = () => {
 	if (isLoading) return <h1>Loading</h1>;
 
 	return (
-		<Wrapper>
-			{countries.map((country, index) => {
-				return (
-					<SingleCountry
-						{...country}
-						key={index}
-					/>
-				);
-			})}
-		</Wrapper>
+		<>
+			<Wrapper>
+				{paginatedCountries[page].map((country, index) => {
+					return (
+						<SingleCountry
+							{...country}
+							key={index}
+						/>
+					);
+				})}
+			</Wrapper>
+			<ButtonsContainer paginatedCountries={paginatedCountries} />
+		</>
 	);
 };
 
@@ -35,6 +41,7 @@ const Wrapper = styled.main`
 	grid-template-columns: auto;
 	row-gap: 3rem;
 	justify-content: center;
+	margin-bottom: 5rem;
 	@media screen and (width > 725px) {
 		grid-template-columns: repeat(2, auto);
 		justify-content: space-between;
