@@ -6,11 +6,10 @@ import { changePage } from '../features/allCountries/allCountriesSlice';
 const ButtonsContainer = ({ paginatedCountries }) => {
 	const { page, countriesPerPage } = useSelector((store) => store.allCountries);
 	const dispatch = useDispatch();
-	const numOfPages = paginatedCountries.length - 1;
+	const numOfPages = paginatedCountries.length;
 
-	console.log('PAGE: ', page);
-	console.log(numOfPages);
-	// console.log(paginatedCountries);
+	console.log('page:', page, 'total :', numOfPages);
+
 	const scrollUp = () => {
 		window.scrollTo({
 			top: 0,
@@ -24,8 +23,8 @@ const ButtonsContainer = ({ paginatedCountries }) => {
 		if (newPage > numOfPages) {
 			newPage = 1;
 		}
-		dispatch(changePage(newPage));
 		scrollUp();
+		dispatch(changePage(newPage));
 	};
 
 	const prevPage = () => {
@@ -33,8 +32,8 @@ const ButtonsContainer = ({ paginatedCountries }) => {
 		if (newPage < 1) {
 			newPage = numOfPages;
 		}
-		dispatch(changePage(newPage));
 		scrollUp();
+		dispatch(changePage(newPage));
 	};
 	return (
 		<Wrapper>
@@ -46,7 +45,52 @@ const ButtonsContainer = ({ paginatedCountries }) => {
 				<HiChevronDoubleLeft />
 				prev
 			</button>
-			<div className="btn-container"></div>
+			<button
+				type="button"
+				className="first-btn"
+				onClick={() => {
+					scrollUp();
+					dispatch(changePage(1));
+				}}
+			>
+				first
+			</button>
+
+			<div className="btn-container">
+				{paginatedCountries.map((_, index) => {
+					const pageNumber = index + 1;
+					const maxLimit = page + 3;
+					const minLimit = page - 2;
+					if (page > 4 && pageNumber > maxLimit) return;
+					if (page > 4 && pageNumber < minLimit) return;
+					if (page < 5 && pageNumber > 5) return;
+
+					return (
+						<button
+							key={index}
+							className={pageNumber === page ? 'pageBtn active' : 'pageBtn'}
+							onClick={() => {
+								scrollUp();
+								dispatch(changePage(pageNumber));
+							}}
+						>
+							{pageNumber}
+						</button>
+					);
+				})}
+			</div>
+
+			<button
+				type="button"
+				className="last-btn"
+				// className="pageBtn"
+				onClick={() => {
+					scrollUp();
+					dispatch(changePage(numOfPages));
+				}}
+			>
+				last
+			</button>
 			<button
 				type="button"
 				className="next-btn"
@@ -62,53 +106,59 @@ const ButtonsContainer = ({ paginatedCountries }) => {
 const Wrapper = styled.section`
 	height: 6rem;
 	margin-top: 2rem;
-
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
 	gap: 1rem;
 	.btn-container {
-		background: var(--primary-100);
 		border-radius: var(--borderRadius);
+		display: flex;
+		gap: 0.5rem;
 	}
 	.pageBtn {
 		background: transparent;
 		border-color: transparent;
-		width: 50px;
-		height: 40px;
-		font-weight: 700;
-		font-size: 1.25rem;
-		color: var(--primary-500);
+		width: 1.75rem;
+		aspect-ratio: 1/1;
+		color: var(--clr-text);
 		transition: var(--transition);
 		border-radius: var(--borderRadius);
 		cursor: pointer;
 	}
 	.active {
-		background: var(--primary-500);
+		background: var(--clr-elements);
 		color: var(--white);
+		box-shadow: var(--shadow-2);
 	}
 	.prev-btn,
-	.next-btn {
-		width: 100px;
-		height: 40px;
-		background: var(--white);
-		border-color: transparent;
-		border-radius: var(--borderRadius);
-		color: var(--primary-500);
+	.next-btn,
+	.last-btn,
+	.first-btn {
+		padding: 0.5rem 1.25rem;
+		padding: 0.5rem;
 		text-transform: capitalize;
-		letter-spacing: var(--letterSpacing);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		gap: 0.5rem;
 		cursor: pointer;
 		transition: var(--transition);
+		border-radius: var(--borderRadius);
 	}
 	.prev-btn:hover,
-	.next-btn:hover {
-		background: var(--primary-500);
-		color: var(--white);
+	.first-btn:hover,
+	.last-btn:hover,
+	.next-btn:hover,
+	.pageBtn:hover {
+		background: var(--clr-elements);
+	}
+
+	@media screen and (width < 700px) {
+		.last-btn,
+		.first-btn {
+			display: none;
+		}
 	}
 `;
 

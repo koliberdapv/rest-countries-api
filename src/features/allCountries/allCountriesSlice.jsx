@@ -12,8 +12,8 @@ const initialFilterState = {
 const initialState = {
 	isLoading: true,
 	countries: {},
-	page: 0,
-	countriesPerPage: 10,
+	page: 1,
+	countriesPerPage: 12,
 	...initialFilterState,
 };
 
@@ -63,7 +63,6 @@ const allCountriesSlice = createSlice({
 	initialState,
 	reducers: {
 		handleChange: (state, { payload: { name, value } }) => {
-			// state.page = 1;
 			if (name === 'sort') {
 				state.search = '';
 			}

@@ -13,6 +13,8 @@ const AllCountriesContainer = () => {
 	const dispatch = useDispatch();
 	const paginatedCountries = paginate(countries);
 
+	// console.log('countries:', paginatedCountries);
+
 	useEffect(() => {
 		dispatch(getAllCountries());
 	}, [sort, search]);
@@ -22,7 +24,7 @@ const AllCountriesContainer = () => {
 	return (
 		<>
 			<Wrapper>
-				{paginatedCountries[page].map((country, index) => {
+				{paginatedCountries[page - 1].map((country, index) => {
 					return (
 						<SingleCountry
 							{...country}
@@ -41,7 +43,6 @@ const Wrapper = styled.main`
 	grid-template-columns: auto;
 	row-gap: 3rem;
 	justify-content: center;
-	margin-bottom: 5rem;
 	@media screen and (width > 725px) {
 		grid-template-columns: repeat(2, auto);
 		justify-content: space-between;
