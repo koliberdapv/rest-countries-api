@@ -13,8 +13,6 @@ const AllCountriesContainer = () => {
 	const dispatch = useDispatch();
 	const paginatedCountries = paginate(countries);
 
-	// console.log('countries:', paginatedCountries);
-
 	useEffect(() => {
 		dispatch(getAllCountries());
 	}, [sort, search]);
@@ -43,6 +41,7 @@ const Wrapper = styled.main`
 	grid-template-columns: auto;
 	row-gap: 3rem;
 	justify-content: center;
+
 	@media screen and (width > 725px) {
 		grid-template-columns: repeat(2, auto);
 		justify-content: space-between;

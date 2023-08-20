@@ -6,7 +6,7 @@ const initialFilterState = {
 	searchStatus: '',
 	searchType: '',
 	sort: '',
-	sortOptions: ['Africa', 'america', 'asia', 'europe', 'oceania'],
+	sortOptions: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
 };
 
 const initialState = {
@@ -51,6 +51,7 @@ export const getAllCountries = createAsyncThunk(
 					code,
 				};
 			});
+
 			return data;
 		} catch (error) {
 			return thunkAPI.rejectWithValue('There was an error');

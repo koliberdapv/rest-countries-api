@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	handleChange,
 	clearFilters,
+	handleChange,
 } from '../features/allCountries/allCountriesSlice';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { BiSearch } from 'react-icons/bi';
+import { TfiClose } from 'react-icons/tfi';
 import { useMemo, useState } from 'react';
 
 const FilterOptions = () => {
 	const [localSearch, setLocalSearch] = useState('');
-	const { sort, sortOptions, search } = useSelector(
-		(store) => store.allCountries
-	);
+	const { sort, sortOptions } = useSelector((store) => store.allCountries);
 	const dispatch = useDispatch();
 
 	const handleFilter = (e) => {
@@ -31,10 +30,11 @@ const FilterOptions = () => {
 	const optimizedDebounce = useMemo(() => debounce(), []);
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setLocalSearch('');
-		// dispatch(clearFilters());
 	};
-
+	const handleCloseBtn = () => {
+		dispatch(clearFilters());
+		setLocalSearch('');
+	};
 	return (
 		<Wrapper>
 			<form onSubmit={handleSubmit}>
@@ -50,15 +50,32 @@ const FilterOptions = () => {
 						name="search"
 						placeholder="Search for a country..."
 					/>
+					<button
+						type="button"
+						className={
+							localSearch.length > 1 ? 'close-btn visible' : 'close-btn'
+						}
+						onClick={handleCloseBtn}
+					>
+						<TfiClose />
+					</button>
 				</div>
 				<div className="filters">
 					<select
 						name="sort"
-						id=""
+						id="sort"
 						value={sort}
-						placeholder="hello"
 						onChange={handleFilter}
 					>
+						{!sort && (
+							<option
+								value="Filter by Region"
+								defaultValue={'Filter by Region'}
+								className="title"
+							>
+								Filter by Region
+							</option>
+						)}
 						{sortOptions.map((item, index) => {
 							return (
 								<option
@@ -80,6 +97,9 @@ const FilterOptions = () => {
 };
 
 const Wrapper = styled.section`
+	.title {
+		display: none;
+	}
 	form {
 		display: flex;
 		justify-content: space-between;
@@ -93,27 +113,50 @@ const Wrapper = styled.section`
 			gap: 1.5rem;
 		}
 	}
-	select,
-	.search input {
-		font-weight: var(--fw-600);
-		padding: 1rem 1.75rem;
-		min-width: 10rem;
-		text-transform: capitalize;
-		border-radius: var(--borderRadius);
+	.filters select,
+	.search {
+		height: 4rem;
 		background-color: var(--clr-elements);
+		border-radius: var(--borderRadius);
 		border: none;
 		color: var(--clr-text);
 		box-shadow: var(--shadow-2);
 		appearance: none;
+		display: flex;
+		align-items: center;
+		padding: 0 0.5rem;
+		min-width: 100%;
 	}
 	.search input {
-		min-width: 100%;
-		padding: 1rem 1.75rem 1rem 4rem;
-		isolation: isolate;
+		color: var(--clr-text);
+		border: none;
+		background-color: var(--clr-elements);
+		flex-basis: 100%;
+		height: 100%;
 	}
-	.search {
-		position: relative;
-		min-width: 100%;
+	.lens {
+		height: 100%;
+		aspect-ratio: 1/1;
+		display: grid;
+		place-items: center;
+	}
+	.close-btn {
+		height: 100%;
+		aspect-ratio: 1/1;
+		margin-left: auto;
+		visibility: hidden;
+	}
+	.visible {
+		visibility: visible;
+	}
+	.lens svg,
+	.close-btn svg {
+		width: 40%;
+		height: 40%;
+	}
+	.filters select {
+		padding: 0 2rem;
+		min-width: 14rem;
 	}
 	@media screen and (width > 700px) {
 		.search {
@@ -121,20 +164,7 @@ const Wrapper = styled.section`
 		}
 	}
 	.search input::placeholder {
-		text-transform: none;
 		color: var(--clr-text);
-	}
-	.lens {
-		position: absolute;
-		height: 100%;
-		aspect-ratio: 1.5/1;
-		z-index: 10;
-		display: grid;
-		place-items: center;
-	}
-	.lens svg {
-		width: 40%;
-		height: 40%;
 	}
 	select:focus,
 	input:focus {

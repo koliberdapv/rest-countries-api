@@ -4,11 +4,9 @@ import styled from 'styled-components';
 import { changePage } from '../features/allCountries/allCountriesSlice';
 
 const ButtonsContainer = ({ paginatedCountries }) => {
-	const { page, countriesPerPage } = useSelector((store) => store.allCountries);
+	const { page } = useSelector((store) => store.allCountries);
 	const dispatch = useDispatch();
 	const numOfPages = paginatedCountries.length;
-
-	console.log('page:', page, 'total :', numOfPages);
 
 	const scrollUp = () => {
 		window.scrollTo({
@@ -59,7 +57,7 @@ const ButtonsContainer = ({ paginatedCountries }) => {
 			<div className="btn-container">
 				{paginatedCountries.map((_, index) => {
 					const pageNumber = index + 1;
-					const maxLimit = page + 3;
+					const maxLimit = page + 2;
 					const minLimit = page - 2;
 					if (page > 4 && pageNumber > maxLimit) return;
 					if (page > 4 && pageNumber < minLimit) return;
@@ -110,21 +108,22 @@ const Wrapper = styled.section`
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	gap: 1rem;
+	gap: 0.5rem;
 	.btn-container {
 		border-radius: var(--borderRadius);
 		display: flex;
 		gap: 0.5rem;
 	}
 	.pageBtn {
-		background: transparent;
 		border-color: transparent;
 		width: 1.75rem;
 		aspect-ratio: 1/1;
-		color: var(--clr-text);
 		transition: var(--transition);
 		border-radius: var(--borderRadius);
 		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 	.active {
 		background: var(--clr-elements);
@@ -135,7 +134,6 @@ const Wrapper = styled.section`
 	.next-btn,
 	.last-btn,
 	.first-btn {
-		padding: 0.5rem 1.25rem;
 		padding: 0.5rem;
 		text-transform: capitalize;
 		display: flex;

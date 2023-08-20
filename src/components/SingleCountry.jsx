@@ -33,6 +33,7 @@ const SingleCountry = ({ name, population, capital, flags, region, code }) => {
 
 const Wrapper = styled.article`
 	box-shadow: var(--shadow-2);
+	border-radius: var(--borderRadius);
 	a {
 		display: grid;
 		grid-template-rows: auto 1fr;
