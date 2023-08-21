@@ -12,8 +12,6 @@ const initialFilterState = {
 const initialState = {
 	isLoading: true,
 	countries: {},
-	// names: [],
-	// names: JSON.parse(localStorage.getItem('countryNames')),
 	page: 1,
 	countriesPerPage: 12,
 	...initialFilterState,
@@ -35,7 +33,6 @@ export const getAllCountries = createAsyncThunk(
 
 		try {
 			const resp = await customFetch(url);
-			// let names = [];
 			const data = resp.data.map((country) => {
 				const {
 					name,
@@ -45,8 +42,6 @@ export const getAllCountries = createAsyncThunk(
 					region,
 					cca3: code,
 				} = country;
-
-				// names.push({ name: code, value: name.common });
 
 				return {
 					name: name.common,
@@ -59,7 +54,6 @@ export const getAllCountries = createAsyncThunk(
 			});
 
 			return data;
-			// return { data, names };
 		} catch (error) {
 			return thunkAPI.rejectWithValue('There was an error');
 		}
@@ -87,12 +81,9 @@ const allCountriesSlice = createSlice({
 		[getAllCountries.pending]: (state) => {
 			state.isLoading = true;
 		},
-		// [getAllCountries.fulfilled]: (state, { payload: { data, names } }) => {
 		[getAllCountries.fulfilled]: (state, { payload }) => {
 			state.isLoading = false;
 			state.countries = payload;
-			// state.countries = data;
-			// state.names = names;
 			state.page = 1;
 		},
 		[getAllCountries.rejected]: (state) => {

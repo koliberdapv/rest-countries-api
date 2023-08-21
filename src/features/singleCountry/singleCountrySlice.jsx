@@ -13,17 +13,6 @@ export const getSingleCountry = createAsyncThunk(
 	async (_, thunkAPI) => {
 		const { countryName } = thunkAPI.getState().singleCountry;
 		let url = `/alpha/${countryName}`;
-
-		const getBorderCountry = async (bc) => {
-			try {
-				const resp = await customFetch(`/alpha/${bc}`);
-				// console.log(resp.data?.[0].name.common);
-				return resp.data?.[0].name.common;
-			} catch (error) {
-				console.log(error);
-			}
-		};
-
 		try {
 			const resp = await customFetch(url);
 			const {
@@ -38,10 +27,6 @@ export const getSingleCountry = createAsyncThunk(
 				borders,
 				flags,
 			} = resp.data?.[0];
-
-			const newBorders = borders.map((item) => {
-				getBorderCountry(item);
-			});
 
 			return {
 				name,

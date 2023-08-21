@@ -9,7 +9,7 @@ import {
 import styled from 'styled-components';
 import formatPopulation from '../utils/formatPopulation';
 import { BsArrowLeft } from 'react-icons/bs';
-import customFetch from '../utils/axios';
+import BorderCountry from '../components/BorderCountry';
 
 const Country = () => {
 	const dispatch = useDispatch();
@@ -18,7 +18,6 @@ const Country = () => {
 		(store) => store.singleCountry
 	);
 
-	// const { names } = useSelector((store) => store.allCountries);
 	const {
 		name,
 		population,
@@ -31,7 +30,6 @@ const Country = () => {
 		borders,
 		flags,
 	} = country;
-	// const [bc, setBc] = useState([]);
 
 	useEffect(() => {
 		if (previousCountryName !== countryName) dispatch(setPrevCountryName());
@@ -39,30 +37,11 @@ const Country = () => {
 		dispatch(getSingleCountry());
 	}, [params.id]);
 
-	// useEffect(() => {
-	// 	setBc(borders);
-	// }, [borders]);
-
 	if (isLoading) return <div>Loading</div>;
 
 	const currency = Object.values(currencies);
 	const nativeName = Object.values(name?.nativeName);
 	const language = Object.values(languages);
-
-	// console.log(bc);
-	// console.log(names);
-
-	// const newBorders = bc.map((item) => {
-	// 	const newBee = names.map((name) => {
-	// 		console.log(name.name);
-	// 		console.log(item);
-
-	// 		if (name.name === item) return name.value;
-	// 	});
-	// 	return newBee;
-	// });
-
-	// console.log(newBorders);
 
 	return (
 		<Wrapper>
@@ -153,19 +132,15 @@ const Country = () => {
 							</p>
 						</div>
 					</div>
-					<ul>
-						<p>
-							<span className="bold border-countries">border countries: </span>
-						</p>
+					<ul className="border-countries">
+						<span className="bold border-countries">border countries: </span>
 						{borders
-							? borders?.map((item, index) => {
+							? borders?.map((borderCountryName, index) => {
 									return (
-										<Link
+										<BorderCountry
 											key={index}
-											to={`/name/${item}`}
-										>
-											<button className="btn">{item}</button>
-										</Link>
+											country={borderCountryName}
+										/>
 									);
 							  })
 							: 'None'}
@@ -208,7 +183,8 @@ const Wrapper = styled.main`
 	h4 {
 		text-wrap: balance;
 	}
-	ul {
+
+	.border-countries {
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
