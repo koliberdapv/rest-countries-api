@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCountries } from '../features/allCountries/allCountriesSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SingleCountry from './SingleCountry';
 import paginate from '../utils/paginate';
 import ButtonsContainer from './ButtonsContainer';
 
 const AllCountriesContainer = () => {
-	const { isLoading, countries, sort, search, page } = useSelector(
+	const { isLoading, countries, sort, search, page, names } = useSelector(
 		(store) => store.allCountries
 	);
 	const dispatch = useDispatch();
@@ -18,6 +18,8 @@ const AllCountriesContainer = () => {
 	}, [sort, search]);
 
 	if (isLoading) return <h1>Loading</h1>;
+
+	localStorage.setItem('countryNames', JSON.stringify(names));
 
 	return (
 		<>

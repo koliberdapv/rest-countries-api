@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import formatPopulation from '../utils/formatPopulation';
+import { useState } from 'react';
 
 const SingleCountry = ({ name, population, capital, flags, region, code }) => {
 	return (

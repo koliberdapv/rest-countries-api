@@ -9,6 +9,7 @@ import {
 import styled from 'styled-components';
 import formatPopulation from '../utils/formatPopulation';
 import { BsArrowLeft } from 'react-icons/bs';
+import customFetch from '../utils/axios';
 
 const Country = () => {
 	const dispatch = useDispatch();
@@ -16,6 +17,8 @@ const Country = () => {
 	const { isLoading, country, previousCountryName, countryName } = useSelector(
 		(store) => store.singleCountry
 	);
+
+	// const { names } = useSelector((store) => store.allCountries);
 	const {
 		name,
 		population,
@@ -28,6 +31,7 @@ const Country = () => {
 		borders,
 		flags,
 	} = country;
+	// const [bc, setBc] = useState([]);
 
 	useEffect(() => {
 		if (previousCountryName !== countryName) dispatch(setPrevCountryName());
@@ -35,11 +39,31 @@ const Country = () => {
 		dispatch(getSingleCountry());
 	}, [params.id]);
 
+	// useEffect(() => {
+	// 	setBc(borders);
+	// }, [borders]);
+
 	if (isLoading) return <div>Loading</div>;
 
 	const currency = Object.values(currencies);
 	const nativeName = Object.values(name?.nativeName);
 	const language = Object.values(languages);
+
+	// console.log(bc);
+	// console.log(names);
+
+	// const newBorders = bc.map((item) => {
+	// 	const newBee = names.map((name) => {
+	// 		console.log(name.name);
+	// 		console.log(item);
+
+	// 		if (name.name === item) return name.value;
+	// 	});
+	// 	return newBee;
+	// });
+
+	// console.log(newBorders);
+
 	return (
 		<Wrapper>
 			<Link

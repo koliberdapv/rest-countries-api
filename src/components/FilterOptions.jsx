@@ -69,7 +69,8 @@ const FilterOptions = () => {
 					>
 						{!sort && (
 							<option
-								value="Filter by Region"
+								value=""
+								disabled
 								defaultValue={'Filter by Region'}
 								className="title"
 							>
@@ -97,9 +98,6 @@ const FilterOptions = () => {
 };
 
 const Wrapper = styled.section`
-	.title {
-		display: none;
-	}
 	form {
 		display: flex;
 		justify-content: space-between;
@@ -184,6 +182,9 @@ const Wrapper = styled.section`
 		align-items: center;
 		pointer-events: none;
 		justify-content: center;
+	}
+	.title {
+		display: none;
 	}
 `;
 
