@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import formatPopulation from '../utils/formatPopulation';
 import { BsArrowLeft } from 'react-icons/bs';
 import BorderCountry from '../components/BorderCountry';
+import LoadingPlaceholderCountry from '../components/LoadingPlaceholderCountry';
 
 const Country = () => {
 	const dispatch = useDispatch();
@@ -37,9 +38,9 @@ const Country = () => {
 		dispatch(getSingleCountry());
 	}, [params.id]);
 
-	if (isLoading) return <div>Loading</div>;
+	if (isLoading) return <LoadingPlaceholderCountry />;
 
-	const currency = Object.values(currencies);
+	const currency = currencies ? Object.values(currencies) : '';
 	const nativeName = Object.values(name?.nativeName);
 	const language = Object.values(languages);
 
@@ -104,17 +105,18 @@ const Country = () => {
 							</p>
 							<p>
 								<span className="bold">currencies: </span>
-								{currency.map((curr, index) => {
-									return (
-										<span
-											key={index}
-											className="currency"
-										>
-											{curr.name}
-											{currency.length - 1 === index ? ' ' : ', '}
-										</span>
-									);
-								})}
+								{currency &&
+									currency.map((curr, index) => {
+										return (
+											<span
+												key={index}
+												className="currency"
+											>
+												{curr.name}
+												{currency.length - 1 === index ? ' ' : ', '}
+											</span>
+										);
+									})}
 							</p>
 							<p>
 								<span className="bold">languages: </span>

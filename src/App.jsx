@@ -15,7 +15,7 @@ const App = () => {
 						element={<AllCountries />}
 					/>
 					<Route
-						path="name/:id"
+						path="/name/:id"
 						element={<Country />}
 					/>
 				</Route>

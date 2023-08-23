@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import formatPopulation from '../utils/formatPopulation';
-import { useState } from 'react';
 
 const SingleCountry = ({ name, population, capital, flags, region, code }) => {
+	console.log(code);
 	return (
 		<Wrapper>
 			<Link to={`/name/${code}`}>

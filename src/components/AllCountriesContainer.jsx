@@ -5,21 +5,29 @@ import { useEffect, useState } from 'react';
 import SingleCountry from './SingleCountry';
 import paginate from '../utils/paginate';
 import ButtonsContainer from './ButtonsContainer';
+import LoadingPlaceholder from './LoadingPlaceholder';
 
 const AllCountriesContainer = () => {
-	const { isLoading, countries, sort, search, page, names } = useSelector(
+	const { isLoading, countries, sort, search, page } = useSelector(
 		(store) => store.allCountries
 	);
 	const dispatch = useDispatch();
 	const paginatedCountries = paginate(countries);
+	const loadingArray = Array.apply(null, Array(12));
 
 	useEffect(() => {
 		dispatch(getAllCountries());
 	}, [sort, search]);
 
-	if (isLoading) return <h1>Loading</h1>;
-
-	localStorage.setItem('countryNames', JSON.stringify(names));
+	if (isLoading) {
+		return (
+			<Wrapper>
+				{loadingArray.map((item, index) => {
+					return <LoadingPlaceholder key={index} />;
+				})}
+			</Wrapper>
+		);
+	}
 
 	return (
 		<>
