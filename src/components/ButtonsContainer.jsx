@@ -81,7 +81,6 @@ const ButtonsContainer = ({ paginatedCountries }) => {
 			<button
 				type="button"
 				className="last-btn"
-				// className="pageBtn"
 				onClick={() => {
 					scrollUp();
 					dispatch(changePage(numOfPages));

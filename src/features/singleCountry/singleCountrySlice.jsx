@@ -5,7 +5,6 @@ const initialState = {
 	isLoading: true,
 	country: {},
 	countryName: '',
-	previousCountryName: '',
 };
 
 export const getSingleCountry = createAsyncThunk(
@@ -42,7 +41,6 @@ export const getSingleCountry = createAsyncThunk(
 			};
 		} catch (error) {
 			return thunkAPI.rejectWithValue('No data found');
-			// redirect to main page
 		}
 	}
 );
@@ -53,9 +51,6 @@ const singleCountry = createSlice({
 	reducers: {
 		setCountryName: (state, { payload }) => {
 			state.countryName = payload;
-		},
-		setPrevCountryName: (state) => {
-			state.previousCountryName = state.countryName;
 		},
 	},
 	extraReducers: {

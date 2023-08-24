@@ -26,7 +26,7 @@ const BorderCountry = ({ country }) => {
 	return (
 		<Link
 			to={`/name/${country}`}
-			className="btn"
+			className="btn border-btn"
 		>
 			{countryName}
 		</Link>

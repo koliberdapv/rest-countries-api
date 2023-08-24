@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import formatPopulation from '../utils/formatPopulation';
 
 const SingleCountry = ({ name, population, capital, flags, region, code }) => {
-	console.log(code);
 	return (
 		<Wrapper>
 			<Link to={`/name/${code}`}>

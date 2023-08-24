@@ -1,10 +1,9 @@
-import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	getSingleCountry,
 	setCountryName,
-	setPrevCountryName,
 } from '../features/singleCountry/singleCountrySlice';
 import styled from 'styled-components';
 import formatPopulation from '../utils/formatPopulation';
@@ -15,9 +14,7 @@ import LoadingPlaceholderCountry from '../components/LoadingPlaceholderCountry';
 const Country = () => {
 	const dispatch = useDispatch();
 	const params = useParams();
-	const { isLoading, country, previousCountryName, countryName } = useSelector(
-		(store) => store.singleCountry
-	);
+	const { isLoading, country } = useSelector((store) => store.singleCountry);
 
 	const {
 		name,
@@ -32,8 +29,11 @@ const Country = () => {
 		flags,
 	} = country;
 
+	const handleBackBtn = () => {
+		window.history.back();
+	};
+
 	useEffect(() => {
-		if (previousCountryName !== countryName) dispatch(setPrevCountryName());
 		dispatch(setCountryName(params.id));
 		dispatch(getSingleCountry());
 	}, [params.id]);
@@ -46,16 +46,15 @@ const Country = () => {
 
 	return (
 		<Wrapper>
-			<Link
-				to={`/${
-					previousCountryName.length > 1 ? `name/${previousCountryName}` : ''
-				}`}
+			<button
+				className="btn back"
+				onClick={handleBackBtn}
+				disabled={isLoading}
 			>
-				<button className="btn back">
-					<BsArrowLeft />
-					back
-				</button>
-			</Link>
+				<BsArrowLeft />
+				back
+			</button>
+
 			<div className="content">
 				<div className="img-container">
 					<img
@@ -64,7 +63,7 @@ const Country = () => {
 					/>
 				</div>
 				<div className="info">
-					<h4 className="bold">{name?.common}</h4>
+					<h3 className="bold title">{name?.common}</h3>
 					<div className="sub-info">
 						<div>
 							<p>
@@ -77,60 +76,65 @@ const Country = () => {
 							</p>
 							<p>
 								<span className="bold">region: </span>
-								{region}
+								{region || 'N/A'}
 							</p>
 							<p>
 								<span className="bold">sub region: </span>
-								{subregion}
+								{subregion || 'N/A'}
 							</p>
 							<p>
 								<span className="bold">capital: </span>
-								{capital}
+								{capital || 'N/A'}
 							</p>
 						</div>
 						<div>
 							<p>
 								<span className="bold">top level domain: </span>
-								{tld?.map((item, index) => {
-									return (
-										<span
-											key={index}
-											className="tld"
-										>
-											{item}
-											{tld.length - 1 === index ? ' ' : ', '}
-										</span>
-									);
-								})}
+								{tld
+									? tld?.map((item, index) => {
+											return (
+												<span
+													key={index}
+													className="tld"
+												>
+													{item}
+													{tld.length - 1 === index ? ' ' : ', '}
+												</span>
+											);
+									  })
+									: 'N/A'}
 							</p>
 							<p>
 								<span className="bold">currencies: </span>
-								{currency &&
-									currency.map((curr, index) => {
-										return (
-											<span
-												key={index}
-												className="currency"
-											>
-												{curr.name}
-												{currency.length - 1 === index ? ' ' : ', '}
-											</span>
-										);
-									})}
+								{currency
+									? currency.map((curr, index) => {
+											return (
+												<span
+													key={index}
+													className="currency"
+												>
+													{curr.name}
+													{currency.length - 1 === index ? ' ' : ', '}
+												</span>
+											);
+									  })
+									: 'N/A'}
 							</p>
 							<p>
 								<span className="bold">languages: </span>
-								{language?.map((lang, index) => {
-									return (
-										<span
-											className="language"
-											key={index}
-										>
-											{lang}
-											{language.length - 1 === index ? ' ' : ', '}
-										</span>
-									);
-								})}
+								{language
+									? language?.map((lang, index) => {
+											return (
+												<span
+													className="language"
+													key={index}
+												>
+													{lang}
+													{language.length - 1 === index ? ' ' : ', '}
+												</span>
+											);
+									  })
+									: 'N/A'}
 							</p>
 						</div>
 					</div>
@@ -157,6 +161,7 @@ const Wrapper = styled.main`
 	display: grid;
 	grid-template-columns: 1fr;
 	font-size: var(--fs-details-normal);
+	gap: 3rem;
 	.content {
 		display: grid;
 		grid-template-columns: 1fr;
@@ -168,6 +173,7 @@ const Wrapper = styled.main`
 		aspect-ratio: 16/9;
 		img {
 			width: 100%;
+			box-shadow: var(--shadow-3);
 		}
 	}
 	.info {
@@ -190,7 +196,7 @@ const Wrapper = styled.main`
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
-		gap: 0.5rem;
+		gap: 0.75rem;
 	}
 	.btn {
 		background-color: var(--clr-elements);
@@ -203,10 +209,14 @@ const Wrapper = styled.main`
 		display: flex;
 		gap: 0.5rem;
 		justify-content: center;
+		align-items: center;
 		margin-top: 2rem;
-	}
-	.border-countries {
-		font-size: 1.15rem;
+		justify-self: left;
+		padding: 0.5rem 2.5rem;
+		svg {
+			height: 1.5rem;
+			width: 1.5rem;
+		}
 	}
 	@media screen and (width > 700px) {
 		.content {
@@ -225,6 +235,14 @@ const Wrapper = styled.main`
 		.border-countries {
 			font-size: var(--fs-details-normal);
 		}
+	}
+	.border-btn {
+		font-size: var(--fs-homepage-normal);
+		padding: 0.5rem 1.75rem;
+		font-weight: var(--fw-300);
+	}
+	.title {
+		font-weight: var(--fw-800);
 	}
 `;
 
