@@ -1,11 +1,11 @@
-import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCountries } from '../features/allCountries/allCountriesSlice';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import SingleCountry from './SingleCountry';
 import paginate from '../utils/paginate';
 import ButtonsContainer from './ButtonsContainer';
 import LoadingPlaceholder from './LoadingPlaceholder';
+import Wrapper from '../assets/wrappers/AllCountriesWrapper';
 
 const AllCountriesContainer = () => {
 	const { isLoading, countries, sort, search, page } = useSelector(
@@ -45,23 +45,5 @@ const AllCountriesContainer = () => {
 		</>
 	);
 };
-
-const Wrapper = styled.main`
-	display: grid;
-	grid-template-columns: auto;
-	row-gap: 3rem;
-	justify-content: center;
-
-	@media screen and (width > 725px) {
-		grid-template-columns: repeat(2, auto);
-		justify-content: space-between;
-	}
-	@media screen and (width > 1120px) {
-		grid-template-columns: repeat(3, auto);
-	}
-	@media screen and (width > 1450px) {
-		grid-template-columns: repeat(4, auto);
-	}
-`;
 
 export default AllCountriesContainer;

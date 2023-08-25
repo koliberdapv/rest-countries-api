@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Country, Error, SharedLayout, AllCountries } from './pages';
+import { Country, Error, AllCountries } from './pages';
+import { SharedLayout } from './components/';
 
 const App = () => {
 	return (
