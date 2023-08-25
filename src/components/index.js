@@ -1,6 +1,7 @@
 import AllCountriesContainer from './AllCountriesContainer';
 import BorderCountry from './BorderCountry';
 import ButtonsContainer from './ButtonsContainer';
+import CountryComponent from './CountryComponent';
 import ErrorComponent from './ErrorComponent';
 import FilterOptions from './FilterOptions';
 import LoadingPlaceholder from './LoadingPlaceholder';
@@ -20,4 +21,5 @@ export {
 	LoadingPlaceholder,
 	ErrorComponent,
 	SharedLayout,
+	CountryComponent,
 };

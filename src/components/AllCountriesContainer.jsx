@@ -1,11 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllCountries } from '../features/allCountries/allCountriesSlice';
 import { useEffect } from 'react';
-import SingleCountry from './SingleCountry';
 import paginate from '../utils/paginate';
-import ButtonsContainer from './ButtonsContainer';
-import LoadingPlaceholder from './LoadingPlaceholder';
+import { useDispatch, useSelector } from 'react-redux';
 import Wrapper from '../assets/wrappers/AllCountriesWrapper';
+import { LoadingPlaceholder, ButtonsContainer, SingleCountry } from './';
+import { getAllCountries } from '../features/allCountries/allCountriesSlice';
 
 const AllCountriesContainer = () => {
 	const { isLoading, countries, sort, search, page } = useSelector(
@@ -14,11 +12,9 @@ const AllCountriesContainer = () => {
 	const dispatch = useDispatch();
 	const paginatedCountries = paginate(countries);
 	const loadingArray = Array.apply(null, Array(12));
-
 	useEffect(() => {
 		dispatch(getAllCountries());
 	}, [sort, search]);
-
 	if (isLoading) {
 		return (
 			<Wrapper>
@@ -28,7 +24,6 @@ const AllCountriesContainer = () => {
 			</Wrapper>
 		);
 	}
-
 	return (
 		<>
 			<Wrapper>
@@ -45,5 +40,4 @@ const AllCountriesContainer = () => {
 		</>
 	);
 };
-
 export default AllCountriesContainer;

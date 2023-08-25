@@ -4,7 +4,6 @@ const Wrapper = styled.main`
 	grid-template-columns: auto;
 	row-gap: 3rem;
 	justify-content: center;
-
 	@media screen and (width > 725px) {
 		grid-template-columns: repeat(2, auto);
 		justify-content: space-between;
@@ -16,5 +15,4 @@ const Wrapper = styled.main`
 		grid-template-columns: repeat(4, auto);
 	}
 `;
-
 export default Wrapper;
