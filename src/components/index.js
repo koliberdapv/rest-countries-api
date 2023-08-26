@@ -7,6 +7,7 @@ import FilterOptions from './FilterOptions';
 import LoadingPlaceholder from './LoadingPlaceholder';
 import LoadingPlaceholderCountry from './LoadingPlaceholderCountry';
 import Navbar from './Navbar';
+import PageButton from './PageButton';
 import SharedLayout from './SharedLayout';
 import SingleCountry from './SingleCountry';
 
@@ -22,4 +23,5 @@ export {
 	ErrorComponent,
 	SharedLayout,
 	CountryComponent,
+	PageButton,
 };

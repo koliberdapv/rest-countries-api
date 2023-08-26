@@ -1,10 +1,12 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-const paginate = (countries) => {
-	const { countriesPerPage } = useSelector((store) => store.allCountries);
-	const pages = Math.ceil(countries.length / countriesPerPage);
-
-	const newCountries = Array.from({ length: pages }, (_, index) => {
+const paginate = () => {
+	const dispatch = useDispatch();
+	const { countriesPerPage, numOfPages, countries, isLoading } = useSelector(
+		(store) => store.allCountries
+	);
+	if (isLoading) return;
+	const newCountries = Array.from({ length: numOfPages }, (_, index) => {
 		const start = index * countriesPerPage;
 		return countries.slice(start, start + countriesPerPage);
 	});

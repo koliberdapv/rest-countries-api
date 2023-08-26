@@ -6,11 +6,11 @@ import { LoadingPlaceholder, ButtonsContainer, SingleCountry } from './';
 import { getAllCountries } from '../features/allCountries/allCountriesSlice';
 
 const AllCountriesContainer = () => {
-	const { isLoading, countries, sort, search, page } = useSelector(
+	const { isLoading, sort, search, page } = useSelector(
 		(store) => store.allCountries
 	);
 	const dispatch = useDispatch();
-	const paginatedCountries = paginate(countries);
+	const paginatedCountries = paginate();
 	const loadingArray = Array.apply(null, Array(12));
 	useEffect(() => {
 		dispatch(getAllCountries());
@@ -18,7 +18,7 @@ const AllCountriesContainer = () => {
 	if (isLoading) {
 		return (
 			<Wrapper>
-				{loadingArray.map((item, index) => {
+				{loadingArray.map((_, index) => {
 					return <LoadingPlaceholder key={index} />;
 				})}
 			</Wrapper>
@@ -36,7 +36,10 @@ const AllCountriesContainer = () => {
 					);
 				})}
 			</Wrapper>
-			<ButtonsContainer paginatedCountries={paginatedCountries} />
+			<ButtonsContainer
+				paginatedCountries={paginatedCountries}
+				page={page}
+			/>
 		</>
 	);
 };

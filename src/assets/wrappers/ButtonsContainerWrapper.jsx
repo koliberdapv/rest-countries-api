@@ -13,7 +13,7 @@ const Wrapper = styled.section`
 		display: flex;
 		gap: 0.5rem;
 	}
-	.pageBtn {
+	.page-btn {
 		border-color: transparent;
 		width: 1.75rem;
 		aspect-ratio: 1/1;
@@ -47,7 +47,7 @@ const Wrapper = styled.section`
 	.first-btn:hover,
 	.last-btn:hover,
 	.next-btn:hover,
-	.pageBtn:hover {
+	.page-btn:hover {
 		background: var(--clr-elements);
 	}
 

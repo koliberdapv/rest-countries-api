@@ -14,6 +14,7 @@ const initialState = {
 	countries: {},
 	page: 1,
 	countriesPerPage: 12,
+	numOfPages: 1,
 	...initialFilterState,
 };
 
@@ -85,6 +86,7 @@ const allCountriesSlice = createSlice({
 			state.isLoading = false;
 			state.countries = payload;
 			state.page = 1;
+			state.numOfPages = Math.ceil(payload.length / state.countriesPerPage);
 		},
 		[getAllCountries.rejected]: (state) => {
 			state.isLoading = false;
