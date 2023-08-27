@@ -1,6 +1,7 @@
 import AllCountriesContainer from './AllCountriesContainer';
 import BorderCountry from './BorderCountry';
 import ButtonsContainer from './ButtonsContainer';
+import CardCategory from './CardCategory';
 import CountryComponent from './CountryComponent';
 import ErrorComponent from './ErrorComponent';
 import FilterOptions from './FilterOptions';
@@ -24,4 +25,5 @@ export {
 	SharedLayout,
 	CountryComponent,
 	PageButton,
+	CardCategory,
 };

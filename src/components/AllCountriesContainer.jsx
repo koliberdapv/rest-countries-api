@@ -11,11 +11,11 @@ const AllCountriesContainer = () => {
 	);
 	const dispatch = useDispatch();
 	const paginatedCountries = paginate();
-	const loadingArray = Array.apply(null, Array(12));
 	useEffect(() => {
 		dispatch(getAllCountries());
 	}, [sort, search]);
 	if (isLoading) {
+		const loadingArray = Array.apply(null, Array(12));
 		return (
 			<Wrapper>
 				{loadingArray.map((_, index) => {

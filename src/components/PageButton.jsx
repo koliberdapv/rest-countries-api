@@ -36,7 +36,9 @@ const PageButton = ({ btnClassName, content, chevron, pageId }) => {
 		if (direction === 'page-btn') {
 			newPage = Number(e.target.id);
 		}
-		scrollUp();
+		setTimeout(() => {
+			scrollUp();
+		}, [100]);
 		dispatch(changePage(newPage));
 	};
 	return (

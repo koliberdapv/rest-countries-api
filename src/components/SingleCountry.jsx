@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import formatPopulation from '../utils/formatPopulation';
 import Wrapper from '../assets/wrappers/SingleCountryWrapper';
+import { CardCategory } from './';
 
 const SingleCountry = ({ name, population, capital, flags, region, code }) => {
 	return (
@@ -15,15 +16,21 @@ const SingleCountry = ({ name, population, capital, flags, region, code }) => {
 				<div className="info">
 					<h5>{name}</h5>
 					<div className="stats">
-						<p>
-							<span>population:</span> {formatPopulation(population)}
-						</p>
-						<p>
-							<span>region:</span> {region}
-						</p>
-						<p>
-							<span>capital:</span> {capital}
-						</p>
+						<CardCategory
+							category="population"
+							value={formatPopulation(population)}
+							format="string"
+						/>
+						<CardCategory
+							category="region"
+							value={region}
+							format="string"
+						/>
+						<CardCategory
+							category="capital"
+							value={capital}
+							format="string"
+						/>
 					</div>
 				</div>
 			</Link>

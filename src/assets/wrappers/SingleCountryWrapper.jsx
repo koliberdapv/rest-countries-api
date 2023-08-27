@@ -38,8 +38,5 @@ const Wrapper = styled.article`
 		flex-direction: column;
 		gap: 0.75rem;
 	}
-	span {
-		font-weight: var(--fw-600);
-	}
 `;
 export default Wrapper;

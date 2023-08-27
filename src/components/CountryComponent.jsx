@@ -7,7 +7,11 @@ import {
 } from '../features/singleCountry/singleCountrySlice';
 import formatPopulation from '../utils/formatPopulation';
 import { BsArrowLeft } from 'react-icons/bs';
-import { LoadingPlaceholderCountry, BorderCountry } from '../components/';
+import {
+	LoadingPlaceholderCountry,
+	BorderCountry,
+	CardCategory,
+} from '../components/';
 import Wrapper from '../assets/wrappers/CountryComponentWrapper';
 
 const CountryComponent = () => {
@@ -65,76 +69,47 @@ const CountryComponent = () => {
 					<h3 className="bold title">{name?.common}</h3>
 					<div className="sub-info">
 						<div>
-							<p>
-								<span className="bold">native name: </span>
-								{nativeName?.[nativeName.length - 1]?.common}
-							</p>
-							<p>
-								<span className="bold">population: </span>
-								{population && formatPopulation(population)}
-							</p>
-							<p>
-								<span className="bold">region: </span>
-								{region || 'N/A'}
-							</p>
-							<p>
-								<span className="bold">sub region: </span>
-								{subregion || 'N/A'}
-							</p>
-							<p>
-								<span className="bold">capital: </span>
-								{capital || 'N/A'}
-							</p>
+							<CardCategory
+								category="native name"
+								value={
+									nativeName?.[nativeName.length - 1]?.common || nativeName
+								}
+								format="string"
+							/>
+							<CardCategory
+								category="population"
+								value={formatPopulation(population)}
+								format="string"
+							/>
+							<CardCategory
+								category="region"
+								value={region}
+								format="string"
+							/>
+							<CardCategory
+								category="sub region"
+								value={subregion}
+								format="string"
+							/>
+							<CardCategory
+								category="capital"
+								value={capital}
+								format="string"
+							/>
 						</div>
 						<div>
-							<p>
-								<span className="bold">top level domain: </span>
-								{tld
-									? tld?.map((item, index) => {
-											return (
-												<span
-													key={index}
-													className="tld"
-												>
-													{item}
-													{tld.length - 1 === index ? ' ' : ', '}
-												</span>
-											);
-									  })
-									: 'N/A'}
-							</p>
-							<p>
-								<span className="bold">currencies: </span>
-								{currency
-									? currency.map((curr, index) => {
-											return (
-												<span
-													key={index}
-													className="currency"
-												>
-													{curr.name}
-													{currency.length - 1 === index ? ' ' : ', '}
-												</span>
-											);
-									  })
-									: 'N/A'}
-							</p>
-							<p>
-								<span className="bold">languages: </span>
-								{language
-									? language?.map((lang, index) => {
-											return (
-												<span
-													className="language"
-													key={index}
-												>
-													{lang}
-													{language.length - 1 === index ? ' ' : ', '}
-												</span>
-											);
-									  })
-									: 'N/A'}
-							</p>
+							<CardCategory
+								category="top level domain"
+								value={tld}
+							/>
+							<CardCategory
+								category="currencies"
+								value={currency}
+							/>
+							<CardCategory
+								category="language"
+								value={language}
+							/>
 						</div>
 					</div>
 					<ul className="border-countries">

@@ -87,17 +87,6 @@ const Wrapper = styled.main`
 	.title {
 		font-weight: var(--fw-800);
 	}
-	.dialog {
-		position: relative;
-	}
-	dialog {
-		position: absolute;
-		top: 0;
-		left: 0;
-		background-color: var(--clr-elements);
-		color: var(--clr-text);
-		text-transform: none;
-	}
 `;
 
 export default Wrapper;

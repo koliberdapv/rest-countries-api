@@ -72,7 +72,7 @@ const Wrapper = styled.main`
 		}
 	}
 	.skeleton {
-		animation: skeleton-loading 1s linear infinite alternate;
+		animation: skeleton-loading 600ms linear infinite alternate;
 		background-color: var(--clr-text);
 	}
 	@keyframes skeleton-loading {
