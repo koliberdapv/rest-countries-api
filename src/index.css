@@ -150,3 +150,10 @@ ul {
 	font-weight: var(--fw-600);
 	text-transform: capitalize;
 }
+.error {
+	margin: 5rem auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.5rem;
+}

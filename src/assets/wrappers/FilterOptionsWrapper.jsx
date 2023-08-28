@@ -31,7 +31,7 @@ const Wrapper = styled.section`
 	.search input {
 		color: var(--clr-text);
 		border: none;
-		background-color: var(--clr-elements);
+		background-color: var(--clr-elements) !important;
 		flex-basis: 100%;
 		height: 100%;
 	}
@@ -88,6 +88,13 @@ const Wrapper = styled.section`
 	}
 	.title {
 		display: none;
+	}
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus,
+	input:-webkit-autofill:active {
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: var(--clr-text);
 	}
 `;
 

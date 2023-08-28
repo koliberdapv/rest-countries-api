@@ -8,10 +8,10 @@ const CardCategory = ({ category, value, format }) => {
 			{format !== 'string' &&
 				value.map((item, index) => {
 					return (
-						<p key={index}>
+						<div key={index}>
 							{item.name || item}
 							{value.length - 1 === index ? ' ' : ', '}
-						</p>
+						</div>
 					);
 				})}
 		</Wrapper>

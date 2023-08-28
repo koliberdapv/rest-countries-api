@@ -94,7 +94,7 @@ const CountryComponent = () => {
 							<CardCategory
 								category="capital"
 								value={capital}
-								format="string"
+								// format="string"
 							/>
 						</div>
 						<div>

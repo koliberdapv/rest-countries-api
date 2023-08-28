@@ -6,7 +6,7 @@ import { LoadingPlaceholder, ButtonsContainer, SingleCountry } from './';
 import { getAllCountries } from '../features/allCountries/allCountriesSlice';
 
 const AllCountriesContainer = () => {
-	const { isLoading, sort, search, page } = useSelector(
+	const { isLoading, sort, search, page, isSearchFailed } = useSelector(
 		(store) => store.allCountries
 	);
 	const dispatch = useDispatch();
@@ -22,6 +22,13 @@ const AllCountriesContainer = () => {
 					return <LoadingPlaceholder key={index} />;
 				})}
 			</Wrapper>
+		);
+	}
+	if (isSearchFailed) {
+		return (
+			<div className="error">
+				<div>No countries found</div>
+			</div>
 		);
 	}
 	return (

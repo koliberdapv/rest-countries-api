@@ -71,7 +71,6 @@ const Wrapper = styled.main`
 			max-width: 40vw;
 		}
 		.sub-info {
-			display: grid;
 			grid-template-columns: repeat(2, auto);
 			justify-content: space-between;
 		}

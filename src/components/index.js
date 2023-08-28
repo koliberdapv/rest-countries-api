@@ -3,12 +3,14 @@ import BorderCountry from './BorderCountry';
 import ButtonsContainer from './ButtonsContainer';
 import CardCategory from './CardCategory';
 import CountryComponent from './CountryComponent';
+import DarkMode from './DarkMode';
 import ErrorComponent from './ErrorComponent';
 import FilterOptions from './FilterOptions';
 import LoadingPlaceholder from './LoadingPlaceholder';
 import LoadingPlaceholderCountry from './LoadingPlaceholderCountry';
 import Navbar from './Navbar';
 import PageButton from './PageButton';
+import Search from './Search';
 import SharedLayout from './SharedLayout';
 import SingleCountry from './SingleCountry';
 
@@ -26,4 +28,6 @@ export {
 	CountryComponent,
 	PageButton,
 	CardCategory,
+	DarkMode,
+	Search,
 };
