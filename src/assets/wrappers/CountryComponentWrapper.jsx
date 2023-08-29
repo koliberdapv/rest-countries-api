@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.main`
-	display: grid;
 	grid-template-columns: 1fr;
 	font-size: var(--fs-details-normal);
 	gap: 3rem;
 	.content {
-		display: grid;
 		grid-template-columns: 1fr;
 		padding: 2rem 0;
 		gap: 2rem;
@@ -20,24 +18,18 @@ const Wrapper = styled.main`
 		}
 	}
 	.info {
-		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		gap: 1.5rem;
 	}
 	.sub-info {
-		display: grid;
 		grid-template-columns: 1fr;
 		gap: 2.5rem;
-		justify-content: space-between;
 	}
 	h4 {
 		text-wrap: balance;
 	}
 
 	.border-countries {
-		display: flex;
-		align-items: center;
 		flex-wrap: wrap;
 		gap: 0.75rem;
 	}
@@ -49,10 +41,7 @@ const Wrapper = styled.main`
 		text-transform: capitalize;
 	}
 	.back {
-		display: flex;
 		gap: 0.5rem;
-		justify-content: center;
-		align-items: center;
 		margin-top: 2rem;
 		justify-self: left;
 		padding: 0.5rem 2.5rem;

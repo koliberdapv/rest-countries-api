@@ -48,9 +48,9 @@ const CountryComponent = () => {
 	const language = Object.values(languages);
 
 	return (
-		<Wrapper>
+		<Wrapper className="grid">
 			<button
-				className="btn back"
+				className="btn back flex center"
 				onClick={handleBackBtn}
 				disabled={isLoading}
 			>
@@ -58,16 +58,16 @@ const CountryComponent = () => {
 				back
 			</button>
 
-			<div className="content">
+			<div className="content grid">
 				<div className="img-container">
 					<img
 						src={flags?.svg || flags?.png}
 						alt={flags?.alt}
 					/>
 				</div>
-				<div className="info">
+				<div className="info flex justify-center">
 					<h3 className="bold title">{name?.common}</h3>
-					<div className="sub-info">
+					<div className="sub-info grid justify-space">
 						<div>
 							<CardCategory
 								category="native name"
@@ -112,7 +112,7 @@ const CountryComponent = () => {
 							/>
 						</div>
 					</div>
-					<ul className="border-countries">
+					<ul className="border-countries flex align-center">
 						<span className="bold border-countries">border countries: </span>
 						{borders
 							? borders?.map((borderCountryName, index) => {

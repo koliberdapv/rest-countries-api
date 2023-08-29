@@ -2,7 +2,13 @@ import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
 import { changePage } from '../features/allCountries/allCountriesSlice';
 
-const PageButton = ({ btnClassName, content, chevron, pageId }) => {
+const PageButton = ({
+	btnClassName,
+	content,
+	chevron,
+	pageId,
+	dataDirection,
+}) => {
 	const { page, numOfPages } = useSelector((store) => store.allCountries);
 	const dispatch = useDispatch();
 	const scrollUp = () => {
@@ -14,26 +20,26 @@ const PageButton = ({ btnClassName, content, chevron, pageId }) => {
 	};
 	const handlePageChange = (e) => {
 		let newPage;
-		const direction = e.target.classList.value;
-		if (direction === 'next-btn') {
+		const direction = e.target.dataset.direction;
+		if (direction === 'next') {
 			newPage = page + 1;
 			if (newPage > numOfPages) {
 				newPage = 1;
 			}
 		}
-		if (direction === 'prev-btn') {
+		if (direction === 'prev') {
 			newPage = page - 1;
 			if (newPage < 1) {
 				newPage = numOfPages;
 			}
 		}
-		if (direction === 'first-btn') {
+		if (direction === 'first') {
 			newPage = 1;
 		}
-		if (direction === 'last-btn') {
+		if (direction === 'last') {
 			newPage = numOfPages;
 		}
-		if (direction === 'page-btn') {
+		if (direction === 'page') {
 			newPage = Number(e.target.id);
 		}
 		setTimeout(() => {
@@ -47,6 +53,7 @@ const PageButton = ({ btnClassName, content, chevron, pageId }) => {
 			className={btnClassName}
 			onClick={handlePageChange}
 			id={pageId}
+			data-direction={dataDirection}
 		>
 			{chevron && content === 'first' && <HiChevronDoubleLeft />}
 			{content}

@@ -3,17 +3,19 @@ import PageButton from './PageButton';
 
 const ButtonsContainer = ({ paginatedCountries, page }) => {
 	return (
-		<Wrapper>
+		<Wrapper className="flex center">
 			<PageButton
-				btnClassName="first-btn"
+				btnClassName="first-btn flex center"
 				content="first"
 				chevron={true}
+				dataDirection="first"
 			/>
 			<PageButton
-				btnClassName="prev-btn"
+				btnClassName="prev-btn flex center"
 				content="prev"
+				dataDirection="prev"
 			/>
-			<div className="btn-container">
+			<div className="btn-container flex center">
 				{paginatedCountries.map((_, index) => {
 					const pageNumber = index + 1;
 					const maxLimit = page + 2;
@@ -27,6 +29,7 @@ const ButtonsContainer = ({ paginatedCountries, page }) => {
 							btnClassName={
 								pageNumber === page ? 'page-btn active' : 'page-btn'
 							}
+							dataDirection="page"
 							content={pageNumber}
 							pageId={pageNumber}
 						/>
@@ -35,13 +38,15 @@ const ButtonsContainer = ({ paginatedCountries, page }) => {
 			</div>
 
 			<PageButton
-				btnClassName="next-btn"
+				btnClassName="next-btn flex center"
 				content="next"
+				dataDirection="next"
 			/>
 			<PageButton
-				btnClassName="last-btn"
+				btnClassName="last-btn flex center"
 				content="last"
 				chevron={true}
+				dataDirection="last"
 			/>
 		</Wrapper>
 	);

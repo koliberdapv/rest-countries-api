@@ -6,6 +6,7 @@ import CountryComponent from './CountryComponent';
 import DarkMode from './DarkMode';
 import ErrorComponent from './ErrorComponent';
 import FilterOptions from './FilterOptions';
+import FilterRegion from './FilterRegion';
 import LoadingPlaceholder from './LoadingPlaceholder';
 import LoadingPlaceholderCountry from './LoadingPlaceholderCountry';
 import Navbar from './Navbar';
@@ -30,4 +31,5 @@ export {
 	CardCategory,
 	DarkMode,
 	Search,
+	FilterRegion,
 };

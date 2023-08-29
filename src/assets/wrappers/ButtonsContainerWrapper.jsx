@@ -3,14 +3,10 @@ import styled from 'styled-components';
 const Wrapper = styled.section`
 	height: 6rem;
 	margin-top: 2rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	flex-wrap: wrap;
 	gap: 0.5rem;
 	.btn-container {
 		border-radius: var(--borderRadius);
-		display: flex;
 		gap: 0.5rem;
 	}
 	.page-btn {
@@ -19,7 +15,6 @@ const Wrapper = styled.section`
 		aspect-ratio: 1/1;
 		transition: var(--transition);
 		border-radius: var(--borderRadius);
-		cursor: pointer;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -35,11 +30,7 @@ const Wrapper = styled.section`
 	.first-btn {
 		padding: 0.5rem;
 		text-transform: capitalize;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		gap: 0.5rem;
-		cursor: pointer;
 		transition: var(--transition);
 		border-radius: var(--borderRadius);
 	}

@@ -157,3 +157,25 @@ ul {
 	justify-content: center;
 	font-size: 1.5rem;
 }
+.flex {
+	display: flex;
+}
+.align-center {
+	align-items: center;
+}
+.justify-space {
+	justify-content: space-between;
+}
+.justify-center {
+	justify-content: center;
+}
+.grid {
+	display: grid;
+}
+.items-center {
+	place-items: center;
+}
+.center {
+	align-items: center;
+	justify-content: center;
+}

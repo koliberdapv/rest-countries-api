@@ -1,7 +1,7 @@
 import Wrapper from '../assets/wrappers/CardCategoryWrapper';
 const CardCategory = ({ category, value, format }) => {
 	return (
-		<Wrapper>
+		<Wrapper className="flex">
 			<span>{category}:</span>
 			{!value && 'N/A'}
 			{format === 'string' && <p>{value}</p>}

@@ -23,6 +23,7 @@ const DarkMode = () => {
 	}, [darkMode]);
 	return (
 		<Wrapper
+			className="flex align-center"
 			aria-label="dark-mode"
 			onClick={handleClick}
 		>

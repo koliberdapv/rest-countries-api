@@ -6,6 +6,7 @@ import {
 	clearFilters,
 	handleChange,
 } from '../features/allCountries/allCountriesSlice';
+import Wrapper from '../assets/wrappers/SearchWrapper';
 
 const Search = () => {
 	const [localSearch, setLocalSearch] = useState('');
@@ -21,16 +22,13 @@ const Search = () => {
 		};
 	};
 	const optimizedDebounce = useMemo(() => debounce(), []);
-	const handleSubmit = (e) => {
-		e.preventDefault();
-	};
 	const handleCloseBtn = () => {
 		dispatch(clearFilters());
 		setLocalSearch('');
 	};
 	return (
-		<div className="search">
-			<span className="lens">
+		<Wrapper className="flex align-center">
+			<span className="lens grid items-center">
 				<BiSearch />
 			</span>
 
@@ -48,7 +46,7 @@ const Search = () => {
 			>
 				<TfiClose />
 			</button>
-		</div>
+		</Wrapper>
 	);
 };
 
