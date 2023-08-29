@@ -17,7 +17,7 @@ const AllCountriesContainer = () => {
 	if (isLoading) {
 		const loadingArray = Array.apply(null, Array(12));
 		return (
-			<Wrapper>
+			<Wrapper className="grid justify-center">
 				{loadingArray.map((_, index) => {
 					return <LoadingPlaceholder key={index} />;
 				})}

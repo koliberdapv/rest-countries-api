@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 		appearance: none;
 		padding: 0 2rem;
 		min-width: 14rem;
+		outline: transparent;
 	}
 	.custom-arrow {
 		position: absolute;
