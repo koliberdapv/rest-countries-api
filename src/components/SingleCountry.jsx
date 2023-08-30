@@ -6,16 +6,19 @@ import { CardCategory } from './';
 const SingleCountry = ({ name, population, capital, flags, region, code }) => {
 	return (
 		<Wrapper>
-			<Link to={`/name/${code}`}>
+			<Link
+				to={`/name/${code}`}
+				className="grid"
+			>
 				<div className="img-container">
 					<img
 						src={flags.png}
 						alt={flags.alt}
 					/>
 				</div>
-				<div className="info">
+				<div className="info grid">
 					<h5>{name}</h5>
-					<div className="stats">
+					<div className="stats grid">
 						<CardCategory
 							category="population"
 							value={formatPopulation(population)}

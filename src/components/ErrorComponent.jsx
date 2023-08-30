@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import not_found from '../assets/images/not_found.svg';
 const ErrorComponent = () => {
 	return (
-		<Wrapper>
+		<Wrapper className="flex center">
 			<div>
 				<img
 					src={not_found}

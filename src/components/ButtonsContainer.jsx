@@ -18,11 +18,21 @@ const ButtonsContainer = ({ paginatedCountries, page }) => {
 			<div className="btn-container flex center">
 				{paginatedCountries.map((_, index) => {
 					const pageNumber = index + 1;
-					const maxLimit = page + 2;
-					const minLimit = page - 2;
-					if (page > 4 && pageNumber > maxLimit) return;
-					if (page > 4 && pageNumber < minLimit) return;
-					if (page < 5 && pageNumber > 5) return;
+					const rangeFromCurrentPage = 2;
+					const rangeBothSides = 4;
+					const wholeRange = 5;
+					const maxLimit = page + rangeFromCurrentPage;
+					const minLimit = page - rangeFromCurrentPage;
+					const isLastFivePages =
+						pageNumber >= paginatedCountries.length - rangeBothSides;
+					if (page > rangeBothSides && pageNumber > maxLimit) return;
+					if (
+						page > rangeBothSides &&
+						!isLastFivePages &&
+						pageNumber < minLimit
+					)
+						return;
+					if (page < wholeRange && pageNumber > wholeRange) return;
 					return (
 						<PageButton
 							key={index}

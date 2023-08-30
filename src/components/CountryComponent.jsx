@@ -18,7 +18,6 @@ const CountryComponent = () => {
 	const dispatch = useDispatch();
 	const params = useParams();
 	const { isLoading, country } = useSelector((store) => store.singleCountry);
-
 	const {
 		name,
 		population,
@@ -31,22 +30,17 @@ const CountryComponent = () => {
 		borders,
 		flags,
 	} = country;
-
 	const handleBackBtn = () => {
 		window.history.back();
 	};
-
 	useEffect(() => {
 		dispatch(setCountryName(params.id));
 		dispatch(getSingleCountry());
 	}, [params.id]);
-
 	if (isLoading) return <LoadingPlaceholderCountry />;
-
 	const currency = currencies ? Object.values(currencies) : '';
 	const nativeName = Object.values(name?.nativeName);
 	const language = Object.values(languages);
-
 	return (
 		<Wrapper className="grid">
 			<button
@@ -57,7 +51,6 @@ const CountryComponent = () => {
 				<BsArrowLeft />
 				back
 			</button>
-
 			<div className="content grid">
 				<div className="img-container">
 					<img
@@ -94,7 +87,6 @@ const CountryComponent = () => {
 							<CardCategory
 								category="capital"
 								value={capital}
-								// format="string"
 							/>
 						</div>
 						<div>

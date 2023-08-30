@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react';
 import { BsMoon } from 'react-icons/bs';
 import { BsMoonFill } from 'react-icons/bs';
 import Wrapper from '../assets/wrappers/DarkModeWrapper';
-
 const isDarkModeEnabled = localStorage.getItem('dark-mode') === 'enabled';
-
 const DarkMode = () => {
 	const [darkMode, setDarkMode] = useState(isDarkModeEnabled);
 	const handleClick = () => {

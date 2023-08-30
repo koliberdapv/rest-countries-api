@@ -10,9 +10,9 @@ const Navbar = () => {
 		dispatch(clearFilters());
 	};
 	return (
-		<Wrapper>
+		<Wrapper className="flex align-center">
 			<div className="container">
-				<div className="navbar">
+				<div className="flex align-center justify-space ">
 					<button onClick={handleClickBack}>
 						<Link to="/">
 							<h4>Where in the world?</h4>

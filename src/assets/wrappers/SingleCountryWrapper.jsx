@@ -4,9 +4,7 @@ const Wrapper = styled.article`
 	box-shadow: var(--shadow-2);
 	border-radius: var(--borderRadius);
 	a {
-		display: grid;
 		grid-template-rows: auto 1fr;
-		align-content: space-between;
 		height: 100%;
 		background-color: var(--clr-elements);
 		border-radius: var(--borderRadius);
@@ -27,15 +25,11 @@ const Wrapper = styled.article`
 		}
 	}
 	.info {
-		display: grid;
 		grid-template-rows: auto auto;
-		align-content: space-between;
 		align-content: flex-start;
 		padding: 2rem;
 	}
 	.stats {
-		display: flex;
-		flex-direction: column;
 		gap: 0.75rem;
 	}
 `;

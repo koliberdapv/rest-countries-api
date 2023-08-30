@@ -16,13 +16,10 @@ const BorderCountry = ({ country }) => {
 			console.log(error);
 		}
 	};
-
 	useEffect(() => {
 		getBorderCountry(country);
 	});
-
 	if (loading) return;
-
 	return (
 		<Link
 			to={`/name/${country}`}

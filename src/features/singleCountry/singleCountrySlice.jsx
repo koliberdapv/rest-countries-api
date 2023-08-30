@@ -53,17 +53,18 @@ const singleCountry = createSlice({
 			state.countryName = payload;
 		},
 	},
-	extraReducers: {
-		[getSingleCountry.pending]: (state) => {
-			state.isLoading = true;
-		},
-		[getSingleCountry.fulfilled]: (state, { payload }) => {
-			state.isLoading = false;
-			state.country = payload;
-		},
-		[getSingleCountry.rejected]: (state) => {
-			state.isLoading = false;
-		},
+	extraReducers: (builder) => {
+		builder
+			.addCase(getSingleCountry.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(getSingleCountry.fulfilled, (state, { payload }) => {
+				state.isLoading = false;
+				state.country = payload;
+			})
+			.addCase(getSingleCountry.rejected, (state) => {
+				state.isLoading = false;
+			});
 	},
 });
 

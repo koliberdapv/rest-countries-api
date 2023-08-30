@@ -79,24 +79,25 @@ const allCountriesSlice = createSlice({
 			state.page = payload;
 		},
 	},
-	extraReducers: {
-		[getAllCountries.pending]: (state) => {
-			state.isLoading = true;
-			state.isSearchFailed = false;
-		},
-		[getAllCountries.fulfilled]: (state, { payload }) => {
-			state.isLoading = false;
-			state.countries = payload;
-			state.page = 1;
-			state.numOfPages = Math.ceil(payload.length / state.countriesPerPage);
-			state.isSearchFailed = false;
-		},
-		[getAllCountries.rejected]: (state) => {
-			state.isLoading = false;
-			state.numOfPages = 1;
-			state.countries = [];
-			state.isSearchFailed = true;
-		},
+	extraReducers: (builder) => {
+		builder
+			.addCase(getAllCountries.pending, (state) => {
+				state.isLoading = true;
+				state.isSearchFailed = false;
+			})
+			.addCase(getAllCountries.fulfilled, (state, { payload }) => {
+				state.isLoading = false;
+				state.countries = payload;
+				state.page = 1;
+				state.numOfPages = Math.ceil(payload.length / state.countriesPerPage);
+				state.isSearchFailed = false;
+			})
+			.addCase(getAllCountries.rejected, (state) => {
+				state.isLoading = false;
+				state.numOfPages = 1;
+				state.countries = [];
+				state.isSearchFailed = true;
+			});
 	},
 });
 

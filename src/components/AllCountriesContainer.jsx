@@ -31,7 +31,6 @@ const AllCountriesContainer = () => {
 			</div>
 		);
 	}
-
 	return (
 		<>
 			<Wrapper className="grid justify-center">
